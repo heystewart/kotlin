@@ -20,4 +20,11 @@ abstract class AbstractNavBarModelExtensionCompatBase : StructureAwareNavBarMode
 
     override val language: Language
         get() = KotlinLanguage.INSTANCE
+
+    override fun acceptParentFromModel(psiElement: PsiElement?): Boolean {
+        if (psiElement is KtFile) {
+            return KotlinIconProvider.getSingleClass(psiElement) == null
+        }
+        return true
+    }
 }
